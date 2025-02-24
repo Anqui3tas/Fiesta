@@ -38,7 +38,7 @@ try {
     curl_setopt($ch, CURLOPT_POST, 1);
     curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($verifyData));
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // Disable SSL verification (only for debugging)
+    //curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // Disable SSL verification (only for debugging)
 
     $captchaVerifyResponse = curl_exec($ch);
 
