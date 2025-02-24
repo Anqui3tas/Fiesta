@@ -19,6 +19,14 @@ h2.lightbg {
   font-family: 'Roboto', sans-serif;
 }
 
+/* Ensure the CAPTCHA is properly displayed */
+.cf-turnstile {
+  display: flex;
+  justify-content: center;
+  margin: 15px 0;
+  max-width: 100%;
+}
+
 h2.lightbg span {
   width: 150px;
   height: 2px;
