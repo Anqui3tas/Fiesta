@@ -132,22 +132,30 @@
   </div>
 </div>
 
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
 <div class="container-fluid subs" id="register">
   <div class="container">
-      <div class="row">
-          <h2 class="darktbgheadlines wow fadeInUp">Come Join the Fun.<span></span></h2>
-          <span class="formdescr wow fadeInRight">Register Below</span>
-          <form id="registerForm">
-              <label for="username">Username:</label>
-              <input type="text" id="username" name="username" required>
-              <label for="password">Password:</label>
-              <input type="password" id="password" name="password" required>
-              <label for="rpassword">Repeat Password:</label>
-              <input type="password" id="rpassword" name="rpassword" required>
-              <button type="submit">Register</button>
-          </form>
-          <div id="statusMessage"></div>
-      </div>
+    <div class="row">
+      <h2 class="darktbgheadlines wow fadeInUp">Come Join the Fun.<span></span></h2>
+      <span class="formdescr wow fadeInRight">Register Below</span>
+      <form id="registerForm">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+
+        <label for="rpassword">Repeat Password:</label>
+        <input type="password" id="rpassword" name="rpassword" required>
+
+        <!-- Cloudflare Turnstile CAPTCHA -->
+        <div class="cf-turnstile" data-sitekey="0x4AAAAAAA-dQBL9M75hdObf"></div>
+
+        <button type="submit">Register</button>
+      </form>
+      <div id="statusMessage"></div>
+    </div>
   </div>
 </div>
 
