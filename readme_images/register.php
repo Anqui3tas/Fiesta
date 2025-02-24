@@ -12,6 +12,36 @@ ini_set('error_log', 'C:\\inetpub\\wwwroot\\php_error.log'); // Adjust the path 
 $data = array('success' => false, 'message' => 'Unknown error');
 
 try {
+    // Verify Cloudflare Turnstile CAPTCHA
+    $captchaResponse = $_POST['cf-turnstile-response'] ?? '';
+    if (empty($captchaResponse)) {
+        throw new Exception('CAPTCHA verification failed: No response provided.');
+    }
+
+    $secretKey = "YOUR_SECRET_KEY"; // Replace with your Cloudflare secret key
+    $verifyUrl = "https://challenges.cloudflare.com/turnstile/v0/siteverify";
+
+    $verifyData = [
+        'secret' => $secretKey,
+        'response' => $captchaResponse,
+        'remoteip' => $_SERVER['REMOTE_ADDR']
+    ];
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $verifyUrl);
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($verifyData));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    $captchaVerifyResponse = curl_exec($ch);
+    curl_close($ch);
+
+    $captchaResult = json_decode($captchaVerifyResponse, true);
+
+    if (!$captchaResult['success']) {
+        throw new Exception('CAPTCHA verification failed: ' . json_encode($captchaResult));
+    }
+
     // Database connection
     $serverName = "localhost";
     $connectionOptions = array(
